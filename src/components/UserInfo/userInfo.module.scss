@@ -1,0 +1,23 @@
+.contentC {
+    background-color: var(--main1);
+    color: white;
+  .username {
+    font-weight: bold;
+  }
+  .infoC{
+      display: flex;
+      gap: 1rem;
+  }
+  .controlC{
+      margin-top: 0.5rem;
+      display: flex;
+      justify-content: flex-end;
+      >button {
+          background-color: var(--bg1);
+          border: none;
+          border-radius: 4px;
+          font-weight: bold;
+          padding: 0.2rem 0.4rem;
+      }
+  }
+}

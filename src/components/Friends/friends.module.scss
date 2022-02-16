@@ -1,0 +1,13 @@
+.contentC {
+  .title {
+    font-weight: bold;
+  }
+  .friendC {
+    margin: 1rem 0;
+    > a {
+      > div:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+.contentC {
+  input {
+    background-color: var(--bg1);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+  }
+  button {
+      cursor: pointer;
+  }
+  > form {
+      width: 12rem;
+      margin: 0 auto;
+    > div {
+        margin-bottom: 1rem;
+        > div {
+          padding-bottom: 0.4rem;
+        font-weight: bold;
+      }
+
+    }
+  }
+}

@@ -1,0 +1,26 @@
+.contentC {
+  .userC {
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    background-color: var(--main1);
+    word-wrap: break-word;
+  }
+  .navC {
+    font-weight: bold;
+    > ul {
+      .logOut {
+        color: var(--br1);
+        cursor: pointer;
+      }
+      > li {
+        text-align: center;
+        padding: 0.4rem 0;
+        border-top: 2px solid var(--bg1);
+      }
+      > li:last-child {
+        border-bottom: 2px solid var(--bg1);
+      }
+    }
+  }
+}

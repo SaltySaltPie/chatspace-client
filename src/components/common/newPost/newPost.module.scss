@@ -1,0 +1,23 @@
+.contentC{
+    background-color: var(--bg2);
+    display: flex;
+    justify-content: space-between;
+    >textarea {
+        border: none;
+        width: 100%;
+        resize: none;
+        &::placeholder {
+            font-weight: bold;
+            color: var(--text3);
+        }
+        &:focus{
+            outline: none;
+        }
+    }
+    >button {
+        cursor: pointer;
+        >div {
+            width: 3rem;
+        }
+    }
+}
