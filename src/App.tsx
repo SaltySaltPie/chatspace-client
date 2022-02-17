@@ -6,7 +6,6 @@ import { AppContext } from "./context/AppContext";
 import styles from "./app.module.scss";
 import Home from "./components/Home/Home";
 import Register from "./components/Register/Register";
-import Test from "./components/Test/Test";
 import UserNav from "./components/common/UserNav/UserNav";
 import Friends from "./components/Friends/Friends";
 function App() {
@@ -24,9 +23,7 @@ function App() {
   return (
     <section className={`${styles.contentC}`}>
       <Nav appState={appState}></Nav>
-      <div style={{ position: "fixed", top: "0", left: "0" }}>
-        <Test></Test>
-      </div>
+      <div style={{ position: "fixed", top: "0", left: "0" }}></div>
       <section className={`${styles.mainC}`}>
         <article className={`${styles.leftC} ${showLeft && styles.showLeft}`}>
           {appState.user._id && <UserNav appState={appState}></UserNav>}
