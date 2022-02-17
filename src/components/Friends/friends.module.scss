@@ -1,4 +1,7 @@
 .contentC {
+  max-height: 50vh;
+  overflow: scroll;
+  overflow-x: hidden;
   .title {
     font-weight: bold;
   }

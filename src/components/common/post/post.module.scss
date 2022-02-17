@@ -27,6 +27,39 @@
       height: 1rem;
     }
   }
+  .replyCountC {
+    width: 8rem;
+    font-size: 0.8rem;
+    text-decoration: underline;
+    color: var(--main1);
+    cursor: pointer;
+  }
+  .inputC {
+    padding-right: 1rem;
+    display: flex;
+    background-color: var(--bg1);
+    > textarea {
+      background-color: var(--bg1);
+      width: 100%;
+      border: none;
+      resize: none;
+      &:focus {
+        outline: none;
+      }
+    }
+    > button {
+      border: none;
+    }
+  }
+  .repliesC {
+    max-height: 20rem;
+    overflow: scroll;
+    overflow-x: hidden;
+    .repliesSpin {
+      display: flex;
+      justify-content: center;
+    }
+  }
 }
 
 .upvote {

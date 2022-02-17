@@ -1,6 +1,3 @@
-import { useState } from "react";
-import { TailSpin } from "react-loader-spinner";
-import { Link } from "react-router-dom";
 import { IAppState } from "../../context/AppState";
 import Post from "../common/post/Post";
 import { IPost } from "../Home/Home";

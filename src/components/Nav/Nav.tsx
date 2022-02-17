@@ -1,8 +1,5 @@
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { IAppState } from "../../context/AppState";
-import { hostURL } from "../../data/host";
-import { axiosErrorHandler } from "../../lib/axiosErrorHandler";
 import styles from "./nav.module.scss";
 
 function Nav({ appState }: { appState: IAppState }) {

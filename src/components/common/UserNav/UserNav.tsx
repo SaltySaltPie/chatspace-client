@@ -1,11 +1,11 @@
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IAppState } from "../../../context/AppState";
 import { hostURL } from "../../../data/host";
-import { axiosErrorHandler } from "../../../lib/axiosErrorHandler";
 import styles from "./userNav.module.scss";
 
 function UserNav({ appState }: { appState: IAppState }) {
+  const navigate = useNavigate()
   const { username, _id } = appState.user;
   if (!username) return null;
   const logoutHandler = async () => {
@@ -17,7 +17,8 @@ function UserNav({ appState }: { appState: IAppState }) {
       );
       if (res.data.redirect) window.location.href = res.data.redirect;
     } catch (error: any) {
-      axiosErrorHandler(error);
+      if (error.response?.status === 401) navigate("/login");
+      console.log({ error });
     }
   };
   return (

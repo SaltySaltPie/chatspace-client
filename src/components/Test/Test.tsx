@@ -18,7 +18,10 @@ function Test() {
     // } catch (error) {
     //   console.log({ error });
     // }
-    console.log({ appStateUser: appState.user });
+    // console.log({ appStateUser: appState.user });
+
+    const res = await axios.get(`${hostURL}/api/user/0`)
+    console.log({res})
   };
   return (
     <section>

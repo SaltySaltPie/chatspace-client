@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios, { Axios, AxiosError } from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { TailSpin } from "react-loader-spinner";
+import { useNavigate, useParams } from "react-router-dom";
 import { IAppState } from "../../context/AppState";
 import { hostURL } from "../../data/host";
-import { axiosErrorHandler } from "../../lib/axiosErrorHandler";
 import NewPost from "../common/newPost/NewPost";
 import Posts from "../Posts/Posts";
 import UserInfo from "../UserInfo/UserInfo";
@@ -31,30 +31,35 @@ export interface IPost {
   comments: [
     {
       _id: string;
-      content:string
+      content: string;
       username: string;
     }
   ];
 }
 function Home({ appState }: { appState: IAppState }) {
+  const navigate = useNavigate();
   const [posts, setPosts] = useState<IPost[]>([]);
-
+  const [fetching, setFetching] = useState<boolean>(true);
   const { uID } = useParams();
 
   const fetchPosts = async (pageID?: number) => {
+    setFetching(true);
     let res;
     try {
       if (uID)
-        res = await axios.get(`${hostURL}/user/${uID}/${pageID || 0}`, {
+        res = await axios.get(`${hostURL}/api/user/${uID}/posts`, {
           withCredentials: true,
         });
       else
-        res = await axios.get(`${hostURL}/posts/${pageID || 0}`, {
+        res = await axios.get(`${hostURL}/api/posts/${pageID || 0}`, {
           withCredentials: true,
         });
       if (res.data.success === true) setPosts([...res.data.posts]);
+      setFetching(false);
     } catch (error: any) {
-      axiosErrorHandler(error);
+      if (error.response?.status === 401) navigate("/login");
+      console.log({ error });
+      setFetching(false);
     }
   };
 
@@ -73,9 +78,15 @@ function Home({ appState }: { appState: IAppState }) {
           <UserInfo uID={uID} appState={appState}></UserInfo>
         </div>
       )}
-      <div className={``}>
-        <Posts posts={posts} appState={appState}></Posts>
-      </div>
+      {fetching ? (
+        <div className={`${styles.spinC}`}>
+          <TailSpin color="var(--main1)" height={"5rem"}></TailSpin>
+        </div>
+      ) : (
+        <div className={``}>
+          <Posts posts={posts} appState={appState}></Posts>
+        </div>
+      )}
     </section>
   );
 }

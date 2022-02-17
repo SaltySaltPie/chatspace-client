@@ -1,7 +1,6 @@
 import { AxiosError } from "axios";
 
-export const axiosErrorHandler = (error: AxiosError) => {
-  if (error.code === "401") window.location.href = "/login";
-  console.log({error});
-  
+export const axiosErrorHandler2 = (error: AxiosError) => {
+  // if (error.response?.status === 401) return navigate("/");
+  console.log({ error });
 };

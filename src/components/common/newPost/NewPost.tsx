@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 import { IAppState } from "../../../context/AppState";
 import { hostURL } from "../../../data/host";
-import { axiosErrorHandler } from "../../../lib/axiosErrorHandler";
 import styles from "./newPost.module.scss";
 function NewPost({
   appState,
@@ -12,6 +12,7 @@ function NewPost({
   appState: IAppState;
   fetchPosts: () => void;
 }) {
+  const navigate = useNavigate()
   const [text, setText] = useState<string>("");
   const [fetching, setFetching] = useState<boolean>(false);
 
@@ -22,7 +23,7 @@ function NewPost({
       setFetching(true);
       setText("");
       const res = await axios.post(
-        `${hostURL}/posts`,
+        `${hostURL}/api/posts`,
         { content: text },
         {
           withCredentials: true,
@@ -34,7 +35,8 @@ function NewPost({
         fetchPosts();
       }
     } catch (error: any) {
-      axiosErrorHandler(error);
+      if (error.response?.status === 401) navigate("/login");
+      console.log({ error });
     }
   };
 

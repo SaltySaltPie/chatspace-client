@@ -13,6 +13,14 @@ function App() {
   const { appState, appDispatch } = useContext(AppContext);
   const [showLeft, setShowLeft] = useState<boolean>(false);
   const [showRight, setShowRight] = useState<boolean>(false);
+
+  const goTop = () => {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <section className={`${styles.contentC}`}>
       <Nav appState={appState}></Nav>
@@ -51,7 +59,7 @@ function App() {
           <img src="/icons/menu.png" alt="" />
           <div>Menu</div>
         </div>
-        <div>
+        <div onClick={() => goTop()}>
           <img src="/icons/draft.png" alt="" />
           <div>Write</div>
         </div>

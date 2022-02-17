@@ -2,8 +2,8 @@ import styles from "./userInfo.module.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { hostURL } from "../../data/host";
-import { axiosErrorHandler } from "../../lib/axiosErrorHandler";
 import { IAppState } from "../../context/AppState";
+import { useNavigate } from "react-router-dom";
 
 function UserInfo({
   uID,
@@ -12,13 +12,16 @@ function UserInfo({
   uID: string | undefined;
   appState: IAppState;
 }) {
-  console.log({ uID });
+  const navigate = useNavigate()
   const fetchUser = async (uID: string | undefined) => {
+    console.log(`${hostURL}/api/user/${uID}/posts`);
+    
     try {
       const res = await axios.get(`${hostURL}/api/user/${uID}`);
       if (res.data.success === true) setUser(res.data.user);
     } catch (error: any) {
-      axiosErrorHandler(error);
+      if (error.response?.status === 401) navigate("/login");
+      console.log({ error });
     }
   };
 
@@ -36,9 +39,7 @@ function UserInfo({
       ? true
       : false;
 
-
   const [user, setUser] = useState<IUser>({});
-  console.log({ user });
   useEffect(() => {
     fetchUser(uID);
   }, [uID]);

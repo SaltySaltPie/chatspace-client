@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { ReactNode, useEffect, useReducer } from "react";
+import { useNavigate } from "react-router-dom";
 import { hostURL } from "../data/host";
 import { AppContext } from "./AppContext";
 import { appReducer } from "./appReducer";
@@ -31,6 +32,7 @@ export type IAppState = {
 //   appDispatch?: React.Dispatch<IAction>
 
 function AppState(props: IProps): JSX.Element {
+  const navigate = useNavigate();
   const appInitState: IAppState = {
     theme: "one",
     user: {
@@ -46,7 +48,8 @@ function AppState(props: IProps): JSX.Element {
       });
       const { user } = res.data;
       if (user) appDispatch({ type: "setUser", payload: user });
-    } catch (error) {
+    } catch (error: any) {
+      if (error.response?.status === 401) navigate("/login");
       console.log({ error });
     }
   };

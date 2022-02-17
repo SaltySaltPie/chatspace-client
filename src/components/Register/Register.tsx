@@ -18,9 +18,8 @@ function Register({ appDispatch }: { appDispatch: React.Dispatch<IAction> }) {
   const { pathname } = useLocation();
 
   useEffect(() => {
-  dispatch({type: "default", payload: defaultState})    
-  }, [pathname])
-  
+    dispatch({ type: "default", payload: defaultState });
+  }, [pathname]);
 
   const [state, dispatch] = useReducer(registerReducer, defaultState);
 
@@ -31,7 +30,7 @@ function Register({ appDispatch }: { appDispatch: React.Dispatch<IAction> }) {
       return dispatch({ type: "error", payload: "password mismatch" });
     dispatch({ type: "error", payload: "" });
     const payload = {
-      username: state.username,
+      username: state.username.replace(/\s+/g, ""),
       password: state.password,
       email: state.email,
     };
@@ -61,7 +60,7 @@ function Register({ appDispatch }: { appDispatch: React.Dispatch<IAction> }) {
       const res = await axios.post(`${hostURL}/auth/login`, payload, {
         withCredentials: true,
       });
-      const { success, redirect, user} = res.data;
+      const { success, redirect, user } = res.data;
       if (success === true) {
         // appDispatch({type:"setUser", payload: user})
         if (redirect) window.location.href = redirect;
@@ -131,7 +130,7 @@ function Register({ appDispatch }: { appDispatch: React.Dispatch<IAction> }) {
             </div>
           )}
           <button
-            type="button"
+            type="submit"
             className={`btn1`}
             onClick={(e) => handleRegister(e)}
           >
@@ -172,7 +171,7 @@ function Register({ appDispatch }: { appDispatch: React.Dispatch<IAction> }) {
             </div>
           )}
           <button
-            type="button"
+            type="submit"
             className={`btn1`}
             onClick={(e) => handleLogin(e)}
           >
